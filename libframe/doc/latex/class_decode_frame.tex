@@ -1,0 +1,792 @@
+\hypertarget{class_decode_frame}{}\section{Référence de la classe Decode\+Frame}
+\label{class_decode_frame}\index{Decode\+Frame@{Decode\+Frame}}
+
+
+classe permettant de decoder les trames à partir d\textquotesingle{}un fichier  
+
+
+
+
+{\ttfamily \#include \char`\"{}include/decodeframe.\+h\char`\"{}}
+
+\subsection*{Fonctions membres publiques}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_decode_frame_ad55f7834381bfcdbe5796d11febfe3f0}{Decode\+Frame} (const char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{class_decode_frame}{Decode\+Frame}. \end{DoxyCompactList}\item 
+\hyperlink{class_decode_frame_ae6ae88ee29bcaff936e7c7b2380f96b4}{Decode\+Frame} ()
+\begin{DoxyCompactList}\small\item\em Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{class_decode_frame}{Decode\+Frame}. \end{DoxyCompactList}\item 
+\hyperlink{class_decode_frame_a150abde40a177b9b585c75d562516f2a}{$\sim$\+Decode\+Frame} ()
+\begin{DoxyCompactList}\small\item\em Destructeur de la classe. \end{DoxyCompactList}\item 
+bool \hyperlink{class_decode_frame_a61d74f8bd0886b27356a4431999049ae}{Set\+File} (const char $\ast$filename)
+\begin{DoxyCompactList}\small\item\em Donne un nom de Fichier à décoder. \end{DoxyCompactList}\item 
+S\+\_\+\+Header\+File $\ast$ \hyperlink{class_decode_frame_ae77129fbf6e42f2260db3d215a954026}{Get\+Header\+File} ()
+\begin{DoxyCompactList}\small\item\em Permet de récupérer le header du fichier. \end{DoxyCompactList}\item 
+bool \hyperlink{class_decode_frame_a84aaba0024f0e2c959c83db47a4e6cd1}{Set\+Packet} (uint16\+\_\+t $\ast$Packet)
+\begin{DoxyCompactList}\small\item\em Donne un pointeur sur un fragment à décoder. \end{DoxyCompactList}\item 
+bool \hyperlink{class_decode_frame_a5d8e060fc486a29d456973255c88e876}{File\+Is\+Open} ()
+\item 
+S\+\_\+\+Header\+Frame $\ast$ \hyperlink{class_decode_frame_a827eb5508bf71de0b80300e967ca4a94}{Get\+Header\+Frame} ()
+\begin{DoxyCompactList}\small\item\em Permet de recupérer le header du dernier fragment décodé \end{DoxyCompactList}\item 
+bool \hyperlink{class_decode_frame_a177c97af4a097447759fdbd28ef8d18a}{Frame\+Error} ()
+\begin{DoxyCompactList}\small\item\em Test quelques octets significatifs dans la trame. \end{DoxyCompactList}\item 
+bool \hyperlink{class_decode_frame_af2b5f1f869480dd72404b2fc3f1bac80}{Is\+So\+F\+Ok} ()
+\begin{DoxyCompactList}\small\item\em Test le premier octet de la trame (0x1230) \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{class_decode_frame_a443f66af9144baf11fa5d5cd9c358729}{Get\+Nb\+Frame\+Amc} ()
+\begin{DoxyCompactList}\small\item\em Donne la valeur du compteur A\+MC du dernier fragment analysé \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_decode_frame_a0e408e31eabbebea698d4f3122b79427}{Get\+Fe\+Id\+File} ()
+\begin{DoxyCompactList}\small\item\em Donne la valeur du Front\+End Id contenu dans le header du fichier. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_decode_frame_a27a2218fdc331c7c4afb1b57c103edac}{Get\+Fe\+Id} ()
+\begin{DoxyCompactList}\small\item\em Donne la valeur du Front\+End Id contenu dans le dernier fragment analysé \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_decode_frame_a0bb520a314a74665a0092dbbf0f32310}{Get\+Mode} ()
+\begin{DoxyCompactList}\small\item\em Donne la valeur du Mode contenu dans le dernier fragment analysé \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_decode_frame_a4bd099178e4f7a067dac451d2cb844b2}{Get\+Tigger\+Type} ()
+\begin{DoxyCompactList}\small\item\em Donne la valeur du Trigger type contenu dans le dernier fragment analysé \end{DoxyCompactList}\item 
+uint64\+\_\+t \hyperlink{class_decode_frame_affbc2d0f3774cb4fff34b42c446a5955}{Get\+Nb\+Frame\+Asm} ()
+\begin{DoxyCompactList}\small\item\em Donne la valeur du compteur A\+SM du dernier fragment analysé \end{DoxyCompactList}\item 
+bool \hyperlink{class_decode_frame_a6dfe57ddaf11b02fd88c2edcc98091f3}{Is\+Cafe\+Deca\+Ok} ()
+\begin{DoxyCompactList}\small\item\em Test quelques octets particuliers de la trame (0xcafedeca) \end{DoxyCompactList}\item 
+uint64\+\_\+t \hyperlink{class_decode_frame_a77f130ef36c084573decb71523cb74a1}{Get\+Undefined} ()
+\begin{DoxyCompactList}\small\item\em Pour l\textquotesingle{}instant ce nombre est une constante. \end{DoxyCompactList}\item 
+uint64\+\_\+t \hyperlink{class_decode_frame_a8ceda592a6bd4ed68faaeeda53b433a0}{Get\+Time\+Stp\+Asm} ()
+\begin{DoxyCompactList}\small\item\em Donne la valeur du Time\+Stamp fourni par la carte A\+SM du dernier fragment analysé \end{DoxyCompactList}\item 
+uint64\+\_\+t \hyperlink{class_decode_frame_a69475a7cd412ac056bc97f16768b470b}{Get\+Time\+Stp\+Thor\+Asm} ()
+\begin{DoxyCompactList}\small\item\em Donne la valeur du Time\+Stamp entre le trigger hard A\+SM. \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_decode_frame_a5fafd547d67ae2f38635174a402b5824}{Get\+Thor\+TT} ()
+\begin{DoxyCompactList}\small\item\em Donne la valeur du type de trigger choisi dans Thor du dernier fragment analysé \end{DoxyCompactList}\item 
+uint64\+\_\+t \hyperlink{class_decode_frame_a036d1c2974dc06c43ee945b7586a14d6}{Get\+Pattern} ()
+\begin{DoxyCompactList}\small\item\em Donne la valeur du pattern provoquant le trigger du dernier fragment analysé \end{DoxyCompactList}\item 
+bool \hyperlink{class_decode_frame_a0161fec474851adebcb4494c8773242e}{Is\+Bobo\+Ok} ()
+\begin{DoxyCompactList}\small\item\em Test 2 octets de la trame (0xb0b0) \end{DoxyCompactList}\item 
+uint64\+\_\+t \hyperlink{class_decode_frame_a81f93958ad2e294cb165ca1fda16e6d5}{Get\+Time\+Stp\+Thor} ()
+\begin{DoxyCompactList}\small\item\em Donne la valeur du Time\+Stamp fourni par la carte thor du dernier fragment analysé \end{DoxyCompactList}\item 
+uint32\+\_\+t \hyperlink{class_decode_frame_a582eb89fe03a3076f394776330a6c037}{Get\+Cpt\+Trigger\+Thor} ()
+\item 
+uint32\+\_\+t \hyperlink{class_decode_frame_ab9c8da95989c9d1d3cb7bb28d2ac5811}{Get\+Cpt\+Trigger\+Asm} ()
+\begin{DoxyCompactList}\small\item\em Donne la valeur du compteur de trigger fourni par la carte A\+SM du dernier fragment analysé \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_decode_frame_a97752547e2e402603dccf279928cd347}{Get\+Nb\+Samples} ()
+\begin{DoxyCompactList}\small\item\em Donne la valeur du nombre d\textquotesingle{}echantillons du dernier fragment analysé \end{DoxyCompactList}\item 
+bool \hyperlink{class_decode_frame_aa778340ea2650ce866f2aac9a59368d4}{Is\+So\+C\+Ok} ()
+\begin{DoxyCompactList}\small\item\em Test le premier octet du du fragment de la voie D\+RS. \end{DoxyCompactList}\item 
+uint8\+\_\+t \hyperlink{class_decode_frame_a9a29ecf0f789fb4afaf0d6fc1fbe9cc2}{Get\+Ch} ()
+\begin{DoxyCompactList}\small\item\em donne le numero de la voie du dernier fragment analysé \end{DoxyCompactList}\item 
+uint16\+\_\+t \hyperlink{class_decode_frame_a7418f106eb0998d886ce5849cfb031d9}{Get\+Srout} ()
+\begin{DoxyCompactList}\small\item\em donne la valeur du srout de la voie du dernier fragment analysé \end{DoxyCompactList}\item 
+bool \hyperlink{class_decode_frame_a239ca7a7a2ffe98f2221137a6119139d}{Is\+Crc\+Ok} ()
+\begin{DoxyCompactList}\small\item\em Calculera le Crc de la trame (actuellement c\textquotesingle{}est une constante (0x9876) \end{DoxyCompactList}\item 
+bool \hyperlink{class_decode_frame_aff3430f81b2b782784b06bfca9616d9f}{Is\+Eo\+F\+Ok} ()
+\begin{DoxyCompactList}\small\item\em Test le dernier octet du fragment. \end{DoxyCompactList}\item 
+uint16\+\_\+t $\ast$ \hyperlink{class_decode_frame_ad84d2562141edd3b4558cb2eb4e829c7}{Next\+Packet} ()
+\begin{DoxyCompactList}\small\item\em Permet de décoder le fragment suivant lu dans le fichier. \end{DoxyCompactList}\item 
+uint16\+\_\+t $\ast$ \hyperlink{class_decode_frame_a067beb626d53137bfa6a331cfc963b5c}{Next\+Channel} (uint16\+\_\+t $\ast$Packet\+Channel, const bool with\+Channel=true)
+\begin{DoxyCompactList}\small\item\em Permet de pointer sur le fragment du channel. \end{DoxyCompactList}\item 
+uint16\+\_\+t $\ast$ \hyperlink{class_decode_frame_a7f74abf3aa3facf17363ce6b643700c5}{Get\+Channel} (int ch)
+\begin{DoxyCompactList}\small\item\em Permet de pointer sur le fragment d\textquotesingle{}une voie Drs. \end{DoxyCompactList}\item 
+void \hyperlink{class_decode_frame_a7d3cb26d923ec22430687186a002c1a8}{Extract\+Header} ()
+\begin{DoxyCompactList}\small\item\em Permet d\textquotesingle{}extraire les information des headers. \end{DoxyCompactList}\item 
+std\+::vector$<$ uint64\+\_\+t $>$ \hyperlink{class_decode_frame_a0b3030ee5fcf599dfc15efa03b007a2d}{Get\+All\+Tstp\+Asm} ()
+\begin{DoxyCompactList}\small\item\em permet d\textquotesingle{}extraire tous les Time\+Stamp A\+SM d\textquotesingle{}un fichier \end{DoxyCompactList}\item 
+std\+::vector$<$ uint64\+\_\+t $>$ \hyperlink{class_decode_frame_aaf768149c11e4f8393af44b73c0163c9}{Get\+All\+Tstp\+Thor} ()
+\begin{DoxyCompactList}\small\item\em permet d\textquotesingle{}extraire tous les Time\+Stamp Thor d\textquotesingle{}un fichier \end{DoxyCompactList}\item 
+std\+::vector$<$ uint64\+\_\+t $>$ \hyperlink{class_decode_frame_a93dc46d04d8ccfbb75284dfaf72b5b25}{Get\+All\+Tstp\+Thor\+Asm} ()
+\begin{DoxyCompactList}\small\item\em permet d\textquotesingle{}extraire tous les Time\+Stamp entre Thor et A\+SM via A\+MC d\textquotesingle{}un fichier \end{DoxyCompactList}\item 
+std\+::vector$<$ uint64\+\_\+t $>$ \hyperlink{class_decode_frame_a86005f4e7d6746978adc98b07e444d1c}{Get\+All\+Pattern} ()
+\begin{DoxyCompactList}\small\item\em permet d\textquotesingle{}extraire tous les patterns d\textquotesingle{}un fichier \end{DoxyCompactList}\item 
+bool \hyperlink{class_decode_frame_a8bf6c842a468a6b43ff3c6bc8b184924}{Save\+Channel} (const char $\ast$name, uint16\+\_\+t $\ast$p)
+\begin{DoxyCompactList}\small\item\em Sauvegarde les voies drs dans un fichier distinct. \end{DoxyCompactList}\item 
+void \hyperlink{class_decode_frame_a83d99fa14a97a0a0d7649afe63a44696}{Print} (uint16\+\_\+t $\ast$val, uint16\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Pour débogage. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Description détaillée}
+classe permettant de decoder les trames à partir d\textquotesingle{}un fichier 
+
+ou en mémoire 
+
+Définition à la ligne 66 du fichier decodeframe.\+h.
+
+
+
+\subsection{Documentation des constructeurs et destructeur}
+\mbox{\Hypertarget{class_decode_frame_ad55f7834381bfcdbe5796d11febfe3f0}\label{class_decode_frame_ad55f7834381bfcdbe5796d11febfe3f0}} 
+\index{Decode\+Frame@{Decode\+Frame}!Decode\+Frame@{Decode\+Frame}}
+\index{Decode\+Frame@{Decode\+Frame}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Decode\+Frame()}{DecodeFrame()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Decode\+Frame\+::\+Decode\+Frame (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+
+Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{class_decode_frame}{Decode\+Frame}. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em filename} & \+: Nom du fichier à decoder. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_decode_frame_ae6ae88ee29bcaff936e7c7b2380f96b4}\label{class_decode_frame_ae6ae88ee29bcaff936e7c7b2380f96b4}} 
+\index{Decode\+Frame@{Decode\+Frame}!Decode\+Frame@{Decode\+Frame}}
+\index{Decode\+Frame@{Decode\+Frame}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Decode\+Frame()}{DecodeFrame()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Decode\+Frame\+::\+Decode\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Fonction de création d\textquotesingle{}une nouvelle instance d\textquotesingle{}un objet \hyperlink{class_decode_frame}{Decode\+Frame}. 
+
+Alloue de la mémoire pour la structure Header\+File et l\textquotesingle{}initialise à zero ~\newline
+ Géneralement appelée par le constructeur d\textquotesingle{}une classe parente \mbox{\Hypertarget{class_decode_frame_a150abde40a177b9b585c75d562516f2a}\label{class_decode_frame_a150abde40a177b9b585c75d562516f2a}} 
+\index{Decode\+Frame@{Decode\+Frame}!````~Decode\+Frame@{$\sim$\+Decode\+Frame}}
+\index{````~Decode\+Frame@{$\sim$\+Decode\+Frame}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{$\sim$\+Decode\+Frame()}{~DecodeFrame()}}
+{\footnotesize\ttfamily Decode\+Frame\+::$\sim$\+Decode\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Destructeur de la classe. 
+
+libère la mémoire utilisée 
+
+\subsection{Documentation des fonctions membres}
+\mbox{\Hypertarget{class_decode_frame_a7d3cb26d923ec22430687186a002c1a8}\label{class_decode_frame_a7d3cb26d923ec22430687186a002c1a8}} 
+\index{Decode\+Frame@{Decode\+Frame}!Extract\+Header@{Extract\+Header}}
+\index{Extract\+Header@{Extract\+Header}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Extract\+Header()}{ExtractHeader()}}
+{\footnotesize\ttfamily void Decode\+Frame\+::\+Extract\+Header (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Permet d\textquotesingle{}extraire les information des headers. 
+
+de tous les fragments d\textquotesingle{}un fichier et de les stocker dans des std\+::vector \mbox{\Hypertarget{class_decode_frame_a5d8e060fc486a29d456973255c88e876}\label{class_decode_frame_a5d8e060fc486a29d456973255c88e876}} 
+\index{Decode\+Frame@{Decode\+Frame}!File\+Is\+Open@{File\+Is\+Open}}
+\index{File\+Is\+Open@{File\+Is\+Open}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{File\+Is\+Open()}{FileIsOpen()}}
+{\footnotesize\ttfamily bool Decode\+Frame\+::\+File\+Is\+Open (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Renvoie}
+true si le fichier existe sinon false 
+\end{DoxyReturn}
+
+
+Définition à la ligne 130 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a177c97af4a097447759fdbd28ef8d18a}\label{class_decode_frame_a177c97af4a097447759fdbd28ef8d18a}} 
+\index{Decode\+Frame@{Decode\+Frame}!Frame\+Error@{Frame\+Error}}
+\index{Frame\+Error@{Frame\+Error}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Frame\+Error()}{FrameError()}}
+{\footnotesize\ttfamily bool Decode\+Frame\+::\+Frame\+Error (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Test quelques octets significatifs dans la trame. 
+
+\begin{DoxyReturn}{Renvoie}
+true si pas d\textquotesingle{}erreur sinon false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_decode_frame_a86005f4e7d6746978adc98b07e444d1c}\label{class_decode_frame_a86005f4e7d6746978adc98b07e444d1c}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+All\+Pattern@{Get\+All\+Pattern}}
+\index{Get\+All\+Pattern@{Get\+All\+Pattern}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+All\+Pattern()}{GetAllPattern()}}
+{\footnotesize\ttfamily std\+::vector$<$uint64\+\_\+t$>$ Decode\+Frame\+::\+Get\+All\+Pattern (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+permet d\textquotesingle{}extraire tous les patterns d\textquotesingle{}un fichier 
+
+\begin{DoxyReturn}{Renvoie}
+std\+::vector valeur des patterns 
+\end{DoxyReturn}
+
+
+Définition à la ligne 322 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a0b3030ee5fcf599dfc15efa03b007a2d}\label{class_decode_frame_a0b3030ee5fcf599dfc15efa03b007a2d}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+All\+Tstp\+Asm@{Get\+All\+Tstp\+Asm}}
+\index{Get\+All\+Tstp\+Asm@{Get\+All\+Tstp\+Asm}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+All\+Tstp\+Asm()}{GetAllTstpAsm()}}
+{\footnotesize\ttfamily std\+::vector$<$uint64\+\_\+t$>$ Decode\+Frame\+::\+Get\+All\+Tstp\+Asm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+permet d\textquotesingle{}extraire tous les Time\+Stamp A\+SM d\textquotesingle{}un fichier 
+
+\begin{DoxyReturn}{Renvoie}
+std\+::vector valeur des timestamp 
+\end{DoxyReturn}
+
+
+Définition à la ligne 307 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_aaf768149c11e4f8393af44b73c0163c9}\label{class_decode_frame_aaf768149c11e4f8393af44b73c0163c9}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+All\+Tstp\+Thor@{Get\+All\+Tstp\+Thor}}
+\index{Get\+All\+Tstp\+Thor@{Get\+All\+Tstp\+Thor}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+All\+Tstp\+Thor()}{GetAllTstpThor()}}
+{\footnotesize\ttfamily std\+::vector$<$uint64\+\_\+t$>$ Decode\+Frame\+::\+Get\+All\+Tstp\+Thor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+permet d\textquotesingle{}extraire tous les Time\+Stamp Thor d\textquotesingle{}un fichier 
+
+\begin{DoxyReturn}{Renvoie}
+std\+::vector valeur des timestamp 
+\end{DoxyReturn}
+
+
+Définition à la ligne 312 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a93dc46d04d8ccfbb75284dfaf72b5b25}\label{class_decode_frame_a93dc46d04d8ccfbb75284dfaf72b5b25}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+All\+Tstp\+Thor\+Asm@{Get\+All\+Tstp\+Thor\+Asm}}
+\index{Get\+All\+Tstp\+Thor\+Asm@{Get\+All\+Tstp\+Thor\+Asm}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+All\+Tstp\+Thor\+Asm()}{GetAllTstpThorAsm()}}
+{\footnotesize\ttfamily std\+::vector$<$uint64\+\_\+t$>$ Decode\+Frame\+::\+Get\+All\+Tstp\+Thor\+Asm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+permet d\textquotesingle{}extraire tous les Time\+Stamp entre Thor et A\+SM via A\+MC d\textquotesingle{}un fichier 
+
+\begin{DoxyReturn}{Renvoie}
+std\+::vector valeur des timestamp 
+\end{DoxyReturn}
+
+
+Définition à la ligne 317 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a9a29ecf0f789fb4afaf0d6fc1fbe9cc2}\label{class_decode_frame_a9a29ecf0f789fb4afaf0d6fc1fbe9cc2}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Ch@{Get\+Ch}}
+\index{Get\+Ch@{Get\+Ch}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Ch()}{GetCh()}}
+{\footnotesize\ttfamily uint8\+\_\+t Decode\+Frame\+::\+Get\+Ch (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+donne le numero de la voie du dernier fragment analysé 
+
+\begin{DoxyReturn}{Renvoie}
+Valeur de la voie entre 0 et 23 
+\end{DoxyReturn}
+
+
+Définition à la ligne 262 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a7f74abf3aa3facf17363ce6b643700c5}\label{class_decode_frame_a7f74abf3aa3facf17363ce6b643700c5}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Channel@{Get\+Channel}}
+\index{Get\+Channel@{Get\+Channel}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Channel()}{GetChannel()}}
+{\footnotesize\ttfamily uint16\+\_\+t$\ast$ Decode\+Frame\+::\+Get\+Channel (\begin{DoxyParamCaption}\item[{int}]{ch }\end{DoxyParamCaption})}
+
+
+
+Permet de pointer sur le fragment d\textquotesingle{}une voie Drs. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em ch} & \+: doone le canal à recuper en 0 et 3 \textbackslash{} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+pointeur sur le channel du fragment 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_decode_frame_ab9c8da95989c9d1d3cb7bb28d2ac5811}\label{class_decode_frame_ab9c8da95989c9d1d3cb7bb28d2ac5811}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Cpt\+Trigger\+Asm@{Get\+Cpt\+Trigger\+Asm}}
+\index{Get\+Cpt\+Trigger\+Asm@{Get\+Cpt\+Trigger\+Asm}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Cpt\+Trigger\+Asm()}{GetCptTriggerAsm()}}
+{\footnotesize\ttfamily uint32\+\_\+t Decode\+Frame\+::\+Get\+Cpt\+Trigger\+Asm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Donne la valeur du compteur de trigger fourni par la carte A\+SM du dernier fragment analysé 
+
+\begin{DoxyReturn}{Renvoie}
+Valeur du compteur A\+SM 
+\end{DoxyReturn}
+
+
+Définition à la ligne 247 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a582eb89fe03a3076f394776330a6c037}\label{class_decode_frame_a582eb89fe03a3076f394776330a6c037}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Cpt\+Trigger\+Thor@{Get\+Cpt\+Trigger\+Thor}}
+\index{Get\+Cpt\+Trigger\+Thor@{Get\+Cpt\+Trigger\+Thor}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Cpt\+Trigger\+Thor()}{GetCptTriggerThor()}}
+{\footnotesize\ttfamily uint32\+\_\+t Decode\+Frame\+::\+Get\+Cpt\+Trigger\+Thor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\begin{DoxyReturn}{Renvoie}
+Valeur compteur de trigger 
+\end{DoxyReturn}
+
+
+Définition à la ligne 242 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a27a2218fdc331c7c4afb1b57c103edac}\label{class_decode_frame_a27a2218fdc331c7c4afb1b57c103edac}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Fe\+Id@{Get\+Fe\+Id}}
+\index{Get\+Fe\+Id@{Get\+Fe\+Id}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Fe\+Id()}{GetFeId()}}
+{\footnotesize\ttfamily uint8\+\_\+t Decode\+Frame\+::\+Get\+Fe\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Donne la valeur du Front\+End Id contenu dans le dernier fragment analysé 
+
+\begin{DoxyReturn}{Renvoie}
+Front end Id 
+\end{DoxyReturn}
+
+
+Définition à la ligne 160 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a0e408e31eabbebea698d4f3122b79427}\label{class_decode_frame_a0e408e31eabbebea698d4f3122b79427}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Fe\+Id\+File@{Get\+Fe\+Id\+File}}
+\index{Get\+Fe\+Id\+File@{Get\+Fe\+Id\+File}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Fe\+Id\+File()}{GetFeIdFile()}}
+{\footnotesize\ttfamily uint8\+\_\+t Decode\+Frame\+::\+Get\+Fe\+Id\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Donne la valeur du Front\+End Id contenu dans le header du fichier. 
+
+\begin{DoxyReturn}{Renvoie}
+Front end Id 
+\end{DoxyReturn}
+
+
+Définition à la ligne 155 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_ae77129fbf6e42f2260db3d215a954026}\label{class_decode_frame_ae77129fbf6e42f2260db3d215a954026}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Header\+File@{Get\+Header\+File}}
+\index{Get\+Header\+File@{Get\+Header\+File}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Header\+File()}{GetHeaderFile()}}
+{\footnotesize\ttfamily S\+\_\+\+Header\+File$\ast$ Decode\+Frame\+::\+Get\+Header\+File (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Permet de récupérer le header du fichier. 
+
+voir la structure S\+\_\+\+Header\+File \begin{DoxyReturn}{Renvoie}
+S\+\_\+\+Header\+File 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_decode_frame_a827eb5508bf71de0b80300e967ca4a94}\label{class_decode_frame_a827eb5508bf71de0b80300e967ca4a94}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Header\+Frame@{Get\+Header\+Frame}}
+\index{Get\+Header\+Frame@{Get\+Header\+Frame}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Header\+Frame()}{GetHeaderFrame()}}
+{\footnotesize\ttfamily S\+\_\+\+Header\+Frame$\ast$ Decode\+Frame\+::\+Get\+Header\+Frame (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Permet de recupérer le header du dernier fragment décodé 
+
+\begin{DoxyReturn}{Renvoie}
+struct S\+\_\+\+Header\+Frame 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_decode_frame_a0bb520a314a74665a0092dbbf0f32310}\label{class_decode_frame_a0bb520a314a74665a0092dbbf0f32310}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Mode@{Get\+Mode}}
+\index{Get\+Mode@{Get\+Mode}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Mode()}{GetMode()}}
+{\footnotesize\ttfamily uint16\+\_\+t Decode\+Frame\+::\+Get\+Mode (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Donne la valeur du Mode contenu dans le dernier fragment analysé 
+
+\begin{DoxyReturn}{Renvoie}
+Mode 
+\end{DoxyReturn}
+
+
+Définition à la ligne 165 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a443f66af9144baf11fa5d5cd9c358729}\label{class_decode_frame_a443f66af9144baf11fa5d5cd9c358729}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Nb\+Frame\+Amc@{Get\+Nb\+Frame\+Amc}}
+\index{Get\+Nb\+Frame\+Amc@{Get\+Nb\+Frame\+Amc}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Nb\+Frame\+Amc()}{GetNbFrameAmc()}}
+{\footnotesize\ttfamily uint32\+\_\+t Decode\+Frame\+::\+Get\+Nb\+Frame\+Amc (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Donne la valeur du compteur A\+MC du dernier fragment analysé 
+
+\begin{DoxyReturn}{Renvoie}
+La valeur du compteur 
+\end{DoxyReturn}
+
+
+Définition à la ligne 150 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_affbc2d0f3774cb4fff34b42c446a5955}\label{class_decode_frame_affbc2d0f3774cb4fff34b42c446a5955}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Nb\+Frame\+Asm@{Get\+Nb\+Frame\+Asm}}
+\index{Get\+Nb\+Frame\+Asm@{Get\+Nb\+Frame\+Asm}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Nb\+Frame\+Asm()}{GetNbFrameAsm()}}
+{\footnotesize\ttfamily uint64\+\_\+t Decode\+Frame\+::\+Get\+Nb\+Frame\+Asm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Donne la valeur du compteur A\+SM du dernier fragment analysé 
+
+\begin{DoxyReturn}{Renvoie}
+Trigger Type 
+\end{DoxyReturn}
+
+
+Définition à la ligne 175 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a97752547e2e402603dccf279928cd347}\label{class_decode_frame_a97752547e2e402603dccf279928cd347}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Nb\+Samples@{Get\+Nb\+Samples}}
+\index{Get\+Nb\+Samples@{Get\+Nb\+Samples}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Nb\+Samples()}{GetNbSamples()}}
+{\footnotesize\ttfamily uint16\+\_\+t Decode\+Frame\+::\+Get\+Nb\+Samples (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Donne la valeur du nombre d\textquotesingle{}echantillons du dernier fragment analysé 
+
+\begin{DoxyReturn}{Renvoie}
+Valeur Time\+Stamp Thor 
+\end{DoxyReturn}
+
+
+Définition à la ligne 252 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a036d1c2974dc06c43ee945b7586a14d6}\label{class_decode_frame_a036d1c2974dc06c43ee945b7586a14d6}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Pattern@{Get\+Pattern}}
+\index{Get\+Pattern@{Get\+Pattern}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Pattern()}{GetPattern()}}
+{\footnotesize\ttfamily uint64\+\_\+t Decode\+Frame\+::\+Get\+Pattern (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Donne la valeur du pattern provoquant le trigger du dernier fragment analysé 
+
+plus d\textquotesingle{}explication à venir \begin{DoxyReturn}{Renvoie}
+Valeur du pattern 
+\end{DoxyReturn}
+
+
+Définition à la ligne 222 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a7418f106eb0998d886ce5849cfb031d9}\label{class_decode_frame_a7418f106eb0998d886ce5849cfb031d9}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Srout@{Get\+Srout}}
+\index{Get\+Srout@{Get\+Srout}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Srout()}{GetSrout()}}
+{\footnotesize\ttfamily uint16\+\_\+t Decode\+Frame\+::\+Get\+Srout (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+donne la valeur du srout de la voie du dernier fragment analysé 
+
+\begin{DoxyReturn}{Renvoie}
+Valeur du Sr\+Out 
+\end{DoxyReturn}
+
+
+Définition à la ligne 267 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a5fafd547d67ae2f38635174a402b5824}\label{class_decode_frame_a5fafd547d67ae2f38635174a402b5824}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Thor\+TT@{Get\+Thor\+TT}}
+\index{Get\+Thor\+TT@{Get\+Thor\+TT}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Thor\+T\+T()}{GetThorTT()}}
+{\footnotesize\ttfamily uint16\+\_\+t Decode\+Frame\+::\+Get\+Thor\+TT (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Donne la valeur du type de trigger choisi dans Thor du dernier fragment analysé 
+
+plus d\textquotesingle{}explication à venir \begin{DoxyReturn}{Renvoie}
+Valeur du trigger type 
+\end{DoxyReturn}
+
+
+Définition à la ligne 216 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a4bd099178e4f7a067dac451d2cb844b2}\label{class_decode_frame_a4bd099178e4f7a067dac451d2cb844b2}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Tigger\+Type@{Get\+Tigger\+Type}}
+\index{Get\+Tigger\+Type@{Get\+Tigger\+Type}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Tigger\+Type()}{GetTiggerType()}}
+{\footnotesize\ttfamily uint16\+\_\+t Decode\+Frame\+::\+Get\+Tigger\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Donne la valeur du Trigger type contenu dans le dernier fragment analysé 
+
+\begin{DoxyReturn}{Renvoie}
+Trigger Type 
+\end{DoxyReturn}
+
+
+Définition à la ligne 170 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a8ceda592a6bd4ed68faaeeda53b433a0}\label{class_decode_frame_a8ceda592a6bd4ed68faaeeda53b433a0}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Time\+Stp\+Asm@{Get\+Time\+Stp\+Asm}}
+\index{Get\+Time\+Stp\+Asm@{Get\+Time\+Stp\+Asm}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Time\+Stp\+Asm()}{GetTimeStpAsm()}}
+{\footnotesize\ttfamily uint64\+\_\+t Decode\+Frame\+::\+Get\+Time\+Stp\+Asm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Donne la valeur du Time\+Stamp fourni par la carte A\+SM du dernier fragment analysé 
+
+en nombre de coup d\textquotesingle{}horloge de 150 Mhz(6.\+66 ns) depuis le début de la D\+AQ \begin{DoxyReturn}{Renvoie}
+Valeur Time\+Stamp A\+SM 
+\end{DoxyReturn}
+
+
+Définition à la ligne 197 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a81f93958ad2e294cb165ca1fda16e6d5}\label{class_decode_frame_a81f93958ad2e294cb165ca1fda16e6d5}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Time\+Stp\+Thor@{Get\+Time\+Stp\+Thor}}
+\index{Get\+Time\+Stp\+Thor@{Get\+Time\+Stp\+Thor}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Time\+Stp\+Thor()}{GetTimeStpThor()}}
+{\footnotesize\ttfamily uint64\+\_\+t Decode\+Frame\+::\+Get\+Time\+Stp\+Thor (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Donne la valeur du Time\+Stamp fourni par la carte thor du dernier fragment analysé 
+
+en nombre de coup d\textquotesingle{}horloge de 240 Mhz(4.\+16 ns) depuis le début de la D\+AQ (à verifier) \begin{DoxyReturn}{Renvoie}
+Valeur Time\+Stamp Thor 
+\end{DoxyReturn}
+
+
+Définition à la ligne 235 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a69475a7cd412ac056bc97f16768b470b}\label{class_decode_frame_a69475a7cd412ac056bc97f16768b470b}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Time\+Stp\+Thor\+Asm@{Get\+Time\+Stp\+Thor\+Asm}}
+\index{Get\+Time\+Stp\+Thor\+Asm@{Get\+Time\+Stp\+Thor\+Asm}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Time\+Stp\+Thor\+Asm()}{GetTimeStpThorAsm()}}
+{\footnotesize\ttfamily uint64\+\_\+t Decode\+Frame\+::\+Get\+Time\+Stp\+Thor\+Asm (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Donne la valeur du Time\+Stamp entre le trigger hard A\+SM. 
+
+et le retour par lafibre de la carte A\+MC du dernier fragment analysé en nombre de coup d\textquotesingle{}horloge de 150 Mhz(6.\+66 ns) \begin{DoxyReturn}{Renvoie}
+Valeur Time\+Stamp entre Thor et A\+SM via A\+MC 
+\end{DoxyReturn}
+
+
+Définition à la ligne 207 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a77f130ef36c084573decb71523cb74a1}\label{class_decode_frame_a77f130ef36c084573decb71523cb74a1}} 
+\index{Decode\+Frame@{Decode\+Frame}!Get\+Undefined@{Get\+Undefined}}
+\index{Get\+Undefined@{Get\+Undefined}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Get\+Undefined()}{GetUndefined()}}
+{\footnotesize\ttfamily uint64\+\_\+t Decode\+Frame\+::\+Get\+Undefined (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pour l\textquotesingle{}instant ce nombre est une constante. 
+
+\begin{DoxyReturn}{Renvoie}
+0x123456789abcdef 
+\end{DoxyReturn}
+
+
+Définition à la ligne 188 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a0161fec474851adebcb4494c8773242e}\label{class_decode_frame_a0161fec474851adebcb4494c8773242e}} 
+\index{Decode\+Frame@{Decode\+Frame}!Is\+Bobo\+Ok@{Is\+Bobo\+Ok}}
+\index{Is\+Bobo\+Ok@{Is\+Bobo\+Ok}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Is\+Bobo\+Ok()}{IsBoboOk()}}
+{\footnotesize\ttfamily bool Decode\+Frame\+::\+Is\+Bobo\+Ok (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test 2 octets de la trame (0xb0b0) 
+
+\begin{DoxyReturn}{Renvoie}
+true si pas d\textquotesingle{}erreur sinon false 
+\end{DoxyReturn}
+
+
+Définition à la ligne 229 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a6dfe57ddaf11b02fd88c2edcc98091f3}\label{class_decode_frame_a6dfe57ddaf11b02fd88c2edcc98091f3}} 
+\index{Decode\+Frame@{Decode\+Frame}!Is\+Cafe\+Deca\+Ok@{Is\+Cafe\+Deca\+Ok}}
+\index{Is\+Cafe\+Deca\+Ok@{Is\+Cafe\+Deca\+Ok}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Is\+Cafe\+Deca\+Ok()}{IsCafeDecaOk()}}
+{\footnotesize\ttfamily bool Decode\+Frame\+::\+Is\+Cafe\+Deca\+Ok (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test quelques octets particuliers de la trame (0xcafedeca) 
+
+\begin{DoxyReturn}{Renvoie}
+true si pas d\textquotesingle{}erreur sinon false 
+\end{DoxyReturn}
+
+
+Définition à la ligne 183 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a239ca7a7a2ffe98f2221137a6119139d}\label{class_decode_frame_a239ca7a7a2ffe98f2221137a6119139d}} 
+\index{Decode\+Frame@{Decode\+Frame}!Is\+Crc\+Ok@{Is\+Crc\+Ok}}
+\index{Is\+Crc\+Ok@{Is\+Crc\+Ok}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Is\+Crc\+Ok()}{IsCrcOk()}}
+{\footnotesize\ttfamily bool Decode\+Frame\+::\+Is\+Crc\+Ok (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Calculera le Crc de la trame (actuellement c\textquotesingle{}est une constante (0x9876) 
+
+\begin{DoxyReturn}{Renvoie}
+true si Crc ok sinon false 
+\end{DoxyReturn}
+
+
+Définition à la ligne 272 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_aff3430f81b2b782784b06bfca9616d9f}\label{class_decode_frame_aff3430f81b2b782784b06bfca9616d9f}} 
+\index{Decode\+Frame@{Decode\+Frame}!Is\+Eo\+F\+Ok@{Is\+Eo\+F\+Ok}}
+\index{Is\+Eo\+F\+Ok@{Is\+Eo\+F\+Ok}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Is\+Eo\+F\+Ok()}{IsEoFOk()}}
+{\footnotesize\ttfamily bool Decode\+Frame\+::\+Is\+Eo\+F\+Ok (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test le dernier octet du fragment. 
+
+\begin{DoxyReturn}{Renvoie}
+true si K27\+\_\+7 sinon false 
+\end{DoxyReturn}
+
+
+Définition à la ligne 277 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_aa778340ea2650ce866f2aac9a59368d4}\label{class_decode_frame_aa778340ea2650ce866f2aac9a59368d4}} 
+\index{Decode\+Frame@{Decode\+Frame}!Is\+So\+C\+Ok@{Is\+So\+C\+Ok}}
+\index{Is\+So\+C\+Ok@{Is\+So\+C\+Ok}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Is\+So\+C\+Ok()}{IsSoCOk()}}
+{\footnotesize\ttfamily bool Decode\+Frame\+::\+Is\+So\+C\+Ok (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test le premier octet du du fragment de la voie D\+RS. 
+
+\begin{DoxyReturn}{Renvoie}
+true si = k29\+\_\+7 
+\end{DoxyReturn}
+
+
+Définition à la ligne 257 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_af2b5f1f869480dd72404b2fc3f1bac80}\label{class_decode_frame_af2b5f1f869480dd72404b2fc3f1bac80}} 
+\index{Decode\+Frame@{Decode\+Frame}!Is\+So\+F\+Ok@{Is\+So\+F\+Ok}}
+\index{Is\+So\+F\+Ok@{Is\+So\+F\+Ok}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Is\+So\+F\+Ok()}{IsSoFOk()}}
+{\footnotesize\ttfamily bool Decode\+Frame\+::\+Is\+So\+F\+Ok (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Test le premier octet de la trame (0x1230) 
+
+\begin{DoxyReturn}{Renvoie}
+true si pas d\textquotesingle{}erreur sinon false 
+\end{DoxyReturn}
+
+
+Définition à la ligne 145 du fichier decodeframe.\+h.
+
+\mbox{\Hypertarget{class_decode_frame_a067beb626d53137bfa6a331cfc963b5c}\label{class_decode_frame_a067beb626d53137bfa6a331cfc963b5c}} 
+\index{Decode\+Frame@{Decode\+Frame}!Next\+Channel@{Next\+Channel}}
+\index{Next\+Channel@{Next\+Channel}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Next\+Channel()}{NextChannel()}}
+{\footnotesize\ttfamily uint16\+\_\+t$\ast$ Decode\+Frame\+::\+Next\+Channel (\begin{DoxyParamCaption}\item[{uint16\+\_\+t $\ast$}]{Packet\+Channel,  }\item[{const bool}]{with\+Channel = {\ttfamily true} }\end{DoxyParamCaption})}
+
+
+
+Permet de pointer sur le fragment du channel. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em Packet\+Channel} & \+: pointeur sur le fragment \\
+\hline
+{\em with\+Channel} & = true le pointeur retourné sera avec le numero de canal et le srout \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+pointeur sur le channel du fragment sinon N\+U\+LL 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_decode_frame_ad84d2562141edd3b4558cb2eb4e829c7}\label{class_decode_frame_ad84d2562141edd3b4558cb2eb4e829c7}} 
+\index{Decode\+Frame@{Decode\+Frame}!Next\+Packet@{Next\+Packet}}
+\index{Next\+Packet@{Next\+Packet}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Next\+Packet()}{NextPacket()}}
+{\footnotesize\ttfamily uint16\+\_\+t$\ast$ Decode\+Frame\+::\+Next\+Packet (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Permet de décoder le fragment suivant lu dans le fichier. 
+
+\begin{DoxyReturn}{Renvoie}
+pointeur sur le premier channel du fragment sinon N\+U\+LL 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_decode_frame_a83d99fa14a97a0a0d7649afe63a44696}\label{class_decode_frame_a83d99fa14a97a0a0d7649afe63a44696}} 
+\index{Decode\+Frame@{Decode\+Frame}!Print@{Print}}
+\index{Print@{Print}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Print()}{Print()}}
+{\footnotesize\ttfamily void Decode\+Frame\+::\+Print (\begin{DoxyParamCaption}\item[{uint16\+\_\+t $\ast$}]{val,  }\item[{uint16\+\_\+t}]{n }\end{DoxyParamCaption})}
+
+
+
+Pour débogage. 
+
+Affiche des valeurs en haxadecimal 
+\begin{DoxyParams}{Paramètres}
+{\em val} & \+: Pointeur sur les valeurs à afficher \\
+\hline
+{\em n} & \+: Nombre de valeur à afficher \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_decode_frame_a8bf6c842a468a6b43ff3c6bc8b184924}\label{class_decode_frame_a8bf6c842a468a6b43ff3c6bc8b184924}} 
+\index{Decode\+Frame@{Decode\+Frame}!Save\+Channel@{Save\+Channel}}
+\index{Save\+Channel@{Save\+Channel}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Save\+Channel()}{SaveChannel()}}
+{\footnotesize\ttfamily bool Decode\+Frame\+::\+Save\+Channel (\begin{DoxyParamCaption}\item[{const char $\ast$}]{name,  }\item[{uint16\+\_\+t $\ast$}]{p }\end{DoxyParamCaption})}
+
+
+
+Sauvegarde les voies drs dans un fichier distinct. 
+
+
+\begin{DoxyParams}{Paramètres}
+{\em name} & \+: nom du fichier \\
+\hline
+{\em p} & \+: pointeur sur le fragment de la voie Drs \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_decode_frame_a61d74f8bd0886b27356a4431999049ae}\label{class_decode_frame_a61d74f8bd0886b27356a4431999049ae}} 
+\index{Decode\+Frame@{Decode\+Frame}!Set\+File@{Set\+File}}
+\index{Set\+File@{Set\+File}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Set\+File()}{SetFile()}}
+{\footnotesize\ttfamily bool Decode\+Frame\+::\+Set\+File (\begin{DoxyParamCaption}\item[{const char $\ast$}]{filename }\end{DoxyParamCaption})}
+
+
+
+Donne un nom de Fichier à décoder. 
+
+le constructeur \hyperlink{class_decode_frame_ae6ae88ee29bcaff936e7c7b2380f96b4}{Decode\+Frame()} doit être préalablement appellé 
+\begin{DoxyParams}{Paramètres}
+{\em filename} & \+: Nom du fichier à decoder. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+true si le fichier existe sinon false 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_decode_frame_a84aaba0024f0e2c959c83db47a4e6cd1}\label{class_decode_frame_a84aaba0024f0e2c959c83db47a4e6cd1}} 
+\index{Decode\+Frame@{Decode\+Frame}!Set\+Packet@{Set\+Packet}}
+\index{Set\+Packet@{Set\+Packet}!Decode\+Frame@{Decode\+Frame}}
+\subsubsection{\texorpdfstring{Set\+Packet()}{SetPacket()}}
+{\footnotesize\ttfamily bool Decode\+Frame\+::\+Set\+Packet (\begin{DoxyParamCaption}\item[{uint16\+\_\+t $\ast$}]{Packet }\end{DoxyParamCaption})}
+
+
+
+Donne un pointeur sur un fragment à décoder. 
+
+le constructeur \hyperlink{class_decode_frame_ae6ae88ee29bcaff936e7c7b2380f96b4}{Decode\+Frame()} doit être préalablement appellé 
+\begin{DoxyParams}{Paramètres}
+{\em Packet} & \+: pointeur sur le debut du fragment à decoder. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Renvoie}
+true (à voir si false existera) 
+\end{DoxyReturn}
+
+
+La documentation de cette classe a été générée à partir du fichier suivant \+:\begin{DoxyCompactItemize}
+\item 
+include/\hyperlink{decodeframe_8h}{decodeframe.\+h}\end{DoxyCompactItemize}
