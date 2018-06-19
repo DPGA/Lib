@@ -1,4 +1,4 @@
-OUTPUT_DIRECTORY       	= @CMAKE_CURRENT_SOURCE_DIR@/../docs/LibFrame
+OUTPUT_DIRECTORY       	= @CMAKE_CURRENT_SOURCE_DIR@/../docs/
 INPUT                  	= @CMAKE_CURRENT_SOURCE_DIR@/src @CMAKE_CURRENT_SOURCE_DIR@/include
 PROJECT_NAME            = "LibFrame"
 PROJECT_LOGO			= @CMAKE_CURRENT_SOURCE_DIR@/images/decode.jpeg
