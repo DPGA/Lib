@@ -345,4 +345,5 @@ ShmRingBuffer<T>::unparse() const
 
 template class ShmRingBuffer<struct SharedMemory>;
 template class ShmRingBuffer<struct sStatFrame>;
+template class ShmRingBuffer<struct sHistoSrout>;
 
