@@ -32,6 +32,14 @@
 #include <cstring>
 #include <memory>
 
+// https://www.geeksforgeeks.org/count-set-bits-in-an-integer/
+// cpp implementation of recursive 
+// approach to find the number 
+// of set bits in binary representation 
+// of positive integer n 
+#include <bits/stdc++.h> 
+
+
 #ifndef WIN32
 #include <sys/types.h>
 #define CLEAR "clear" 
@@ -47,6 +55,20 @@ const char *Color(bool c){
   if (c) return("OK");
   else return("Nok");
 }
+
+
+// recursive function to count set bits 
+int countSetBits(int n) 
+{ 
+  // base case 
+  if (n == 0) 
+    return 0; 
+  
+  else
+    
+    // if last bit set add 1 else add 0 
+    return (n & 1) + countSetBits(n >> 1); 
+} 
 
 int isDir(char* s){ // for search only one character // (char*)(NameOf_fichierLu.c_str())
   if ((strchr(s, '.')) == NULL) /* Si le nom du chemin n'a pas de point (une extension). */
@@ -92,8 +114,10 @@ void ReadAndLoadADirectory(vector <string> &v_CompleteNameOfFile,string Path,str
   string EndOfPath ="/";
   string Complete_dir = Path+NameOfDirectory+EndOfPath;
   
+  //   cout << "Complete_dir "<< Complete_dir << endl;
+  
   rep = opendir(Complete_dir.c_str());
-  if (rep == NULL) exit(1);
+  if (rep == NULL){cout << "No datas in this directory Plese check exit(0) "<< Complete_dir << endl; exit(1);}
   
   while ((fichierLu = readdir(rep)) != NULL){
     string NameOf_fichierLu = fichierLu->d_name;
@@ -108,14 +132,19 @@ void ReadAndLoadADirectory(vector <string> &v_CompleteNameOfFile,string Path,str
   return;
 }
 
-int NumberOfTotalFrameForWriteEvent_Pattern(uint64_t Pattern, int TotalOfAMS) {
+int NumberOfTotalFrameForWriteEvent_Pattern(uint64_t Pattern, int TotalOfASM) {
   
   int  NumberOfTotalFrameForWriteEvent = -1;
   
-//   cout << hex<<Pattern<<dec << " " << TotalOfAMS << endl;
+  //   cout << hex<<Pattern<<dec << " " << TotalOfASM << endl;
   
-  if(Pattern == (uint64_t)0xfffffffff ) return (6* TotalOfAMS);
-  else{cout << "Unknow Pattern " << endl; exit(0);} 
+  if(Pattern == (uint64_t)0xfffffffff ) return (6* TotalOfASM);
+  else{
+    //     cout << "Unknow Pattern [Build_Event_Multi.cpp] Patern hex " << hex<<Pattern<<dec << endl;
+//     /* exit(0);*/
+    return NumberOfTotalFrameForWriteEvent;
+    
+  } 
   
 }
 
@@ -126,41 +155,59 @@ int main()
   //**** Macro Commands
   int NombreDeFragmentATester	=	0 ; /* 59796;*/ // ATTENTION <1 for analyse all file
   
-  bool Erase_Maps	= true;
+  bool Erase_Maps	= true; // if complete event -> write
   
   int PrintTheHeader 	= 	0; // 1-> print only "Fragment & Pointer Rawdata & Start Of Frame" 2 -> All
   int PrintChannels 	=	0;
   int PrintCRC_Eof	= 	0;
   
-  bool SaveIncompleteEvent	= true; // Bool for Save Uncomplete Event At The end of The file
+  bool SaveIncompleteEvent	= false; // Bool for Save Uncomplete Event At The end of The file
   
-  int StopAfter_X_DataFiles = 1; // Option pour stopper l'analyse après que le premier fichier ait fini (Si les fichiers ont des tailles différentes)
-				 // 0 -> Analyse All ||
+  int StopAfter_X_DataFiles = 0; // Option pour stopper l'analyse après que le premier fichier ait fini (Si les fichiers ont des tailles différentes)
+  // 0 -> Analyse All ||
+  
+  
   
   //******
+  bool TestFile = false ;// Test File Merge
   
   
   //name file input put directory
-  string Path = "./../../";
-  string NameOfDirectory = "datas";
-  
+  string Path = "/datas1/";
+  string NameOfDirectory = "Run_000037";
   
   // Write_File_Multi
-  const char * W_FileName = "Write_File_Multi.bin";
+  system("rm /home/daq/Merge/Write_File_Multi_Run_000037.bin");
+  const char * W_FileName = "/home/daq/Merge/Write_File_Multi_Run_000037.bin";
+//   W_FileName="/media/sf_Documents/run4Board1_Merge";
+  
+   bool bool_FirstCptTriggerThor = false; // Enleve le 1er compteur Thor bug DAQ False
+  if(TestFile == true){
+    Path = "./DataMulti/";
+    NameOfDirectory = "";
+    W_FileName = "./DataMultiTest/Write_File_Multi.bin";
+    bool_FirstCptTriggerThor = true;
+  }
+  
   FILE * File = fopen(W_FileName,"w");
+  
   
   // Read and Load the data contained in a directory
   vector <string> v_CompleteNameOfFile;
   string ExtensionOfResearchFile =".bin";
   ReadAndLoadADirectory(v_CompleteNameOfFile, Path, NameOfDirectory,ExtensionOfResearchFile ); 
   
+  
   // Transform Data in a map of DecodeFrame and Write the Header of All File
   map <int, DecodeFrame* > map_LoadAllData;
   S_HeaderFile *HeaderFile;
   
   int indic = 0;
+  
+  cout << "\nNbr of File (1 File = 1 Card) : " << v_CompleteNameOfFile.size() << "\n" << endl;
+  
   for(auto& x: v_CompleteNameOfFile){
-//     cout << x << endl;
+    cout << x << endl;
     DecodeFrame *s1 = new DecodeFrame(x.c_str());
     HeaderFile = s1->GetHeaderFile();
     if(!HeaderFile){cout << "No Header File please check datas ! exit(0)" << endl; exit(0);}
@@ -170,14 +217,25 @@ int main()
     int Real_NumeroCard = NumeroCard-16;
     cout <<"#Card dec " << (NumeroCard-16) << " hex " << hex<<NumeroCard<<dec << "\n" <<endl;
     
-    if(map_LoadAllData[Real_NumeroCard] != NULL){cout << "DATA of same card exit(0)" << endl; exit(0);}
-    else map_LoadAllData[Real_NumeroCard]=s1;
-    //**** Write one Header Now Hearder of the first card ***/ 
-    if(indic ==0){fwrite(HeaderFile,sizeof(S_HeaderFile),1,File );}
-    //******
-     indic++;
+    
+    if(Real_NumeroCard < 0){
+      cout << "WARNING Numero card < 0 continue " << Real_NumeroCard << endl;
+      continue;
+    }
+    
+    if(map_LoadAllData[Real_NumeroCard] != NULL){
+      cout << "DATA of same card exit(0) " << Real_NumeroCard << endl; exit(0);}
+      else map_LoadAllData[Real_NumeroCard]=s1;
+      //**** Write one Header Now Hearder of the first card ***/ 
+      cout << "Write one Header Now Hearder of the first card " << endl;
+      if(indic ==0){fwrite(HeaderFile,sizeof(S_HeaderFile),1,File );}
+      cout << "end write " << endl;
+      //******
+      indic++;
   }
-
+  
+  cout << "\nNbr of File (1 File = 1 Card) After check name : " << map_LoadAllData.size() << "\n" << endl;
+  
   // Declare maps
   map < int , vector <int> > map_Trigger_TimeStamp_Thor; 
   map < int , int > map_CompteurPaquetThor;
@@ -191,12 +249,14 @@ int main()
   // LimitForTest function
   bool LimitForTest = false;
   if(NombreDeFragmentATester>0)LimitForTest = true;
-  if(LimitForTest == false) cout << "\nWARNING Mode Complete Analyse Data" << endl;
+  if(LimitForTest == false) cout << "\n*** Mode Complete Analyse Data ***\n" << endl;
   else cout << "WARNING Analyse only " <<  NombreDeFragmentATester << " fragments\n" << endl; 
   
   uint16_t *pCh = NULL;
   unsigned long Index=0;
-  int z =1;
+  unsigned long z =1;
+  
+  unsigned long CorruptFragment = 0;
   
   int StopAfterCheckAllCard = 0;
   int NumberOfTotalFrameForWriteEvent = 6 * map_LoadAllData.size();
@@ -208,6 +268,9 @@ int main()
   
   if(StopAfter_X_DataFiles <=0)StopAfter_X_DataFiles = SizeDataFiles;
   
+  int FirstCptTriggerThor = -1;
+  bool bool_FirstCptTriggerThor_Erase = false;
+ 
   do {
     
     if(map_For_Break.size() == StopAfter_X_DataFiles ) break;
@@ -233,11 +296,22 @@ int main()
       int CptTriggerAsm =  static_cast<int>( NumberCard.second->GetCptTriggerAsm());
       int NbSamples = static_cast<int>( NumberCard.second->GetNbSamples());
       int NbrChannels = 0;
-     
-     //
-     NumberOfTotalFrameForWriteEvent = NumberOfTotalFrameForWriteEvent_Pattern(NumberCard.second->GetPattern(),SizeDataFiles);
-     // 
-     
+      
+      if(bool_FirstCptTriggerThor==false){FirstCptTriggerThor=CptTriggerThor;bool_FirstCptTriggerThor=true;}
+      
+      
+//       NumberOfTotalFrameForWriteEvent =  2 * countSetBits(NumberCard.second->GetPattern()); // method 1
+        NumberOfTotalFrameForWriteEvent = 2 * __builtin_popcount (NumberCard.second->GetPattern()); // method 2
+      
+      //
+      //       NumberOfTotalFrameForWriteEvent = NumberOfTotalFrameForWriteEvent_Pattern(NumberCard.second->GetPattern(),SizeDataFiles);
+      //            // if Pattern unknow 
+      //            if(NumberOfTotalFrameForWriteEvent == -1){        
+      // 	     NumberOfTotalFrameForWriteEvent =  2 * countSetBits(NumberCard.second->GetPattern());
+      //           }
+      
+      //        cout <<" NumberOfTotalFrameForWriteEvent " << NumberOfTotalFrameForWriteEvent << endl;
+      
       //********************************************************************
       //
       // 		Print infos
@@ -253,7 +327,7 @@ int main()
 	printf("Fragement %lu **************************************************\n",Index++);
 	printf("Pointer Rawdata %p Start Of Frame 0x%x\n",pRawData,HdrFrame->StartOfFrame);
 	printf("Nombre trigger Thor\t%d\n", NumberCard.second->GetCptTriggerThor());
-	cout << " ## " << NumberCard.first << endl;
+	cout << "CardNumber ## " << NumberCard.first << endl;
 	if(PrintTheHeader >1 ){
 	  printf("Start of Frame \t\t%s\n",Color( NumberCard.second->IsSoFOk()));
 	  printf("Nombre Frame AMC\t%d\n", NumberCard.second->GetNbFrameAmc());
@@ -301,7 +375,11 @@ int main()
       if(PrintCRC_Eof >0){
 	cout << "CRC " << hex<< NumberCard.second->GetCRC(pRawData)<<dec << endl;
 	cout << "Eof " << hex<<unsigned( NumberCard.second->GetEof(pRawData))<<dec << endl;
+	
+	
       }
+      
+      
       // Pour l'esthétique
       if( (PrintChannels || PrintTheHeader || PrintCRC_Eof ) >0) printf("\n");
       
@@ -315,16 +393,32 @@ int main()
       // 		Map For constitute event
       //********************************************************************
       
+       uint16_t Crc_Original	= NumberCard.second->GetCRC(pRawData);
+       string Crc_Original_String = Color(NumberCard.second->IsCrcOk(Crc_Original));
+       
+      /*
+		* \brief donne l'information si Trigger fibre non reçu
+		* \return false si le trigger fibre est bien reçu sinon true
+		* \brief si la reponse est true, les infomations TT,Pattern,TimestampThor,Trigger count sont éronnées
+		*/	
+       bool ErorTT = NumberCard.second->IsErrorTT();
+      
+//       if(ErorTT == true )cout << "Cpt " << CptTriggerThor << endl;
+      
       //*** Map For constitute event
-      if( pRawData && HdrFrame ){
+      if( pRawData && HdrFrame && Crc_Original_String !="Nok" && ErorTT == false && CptTriggerThor>0 ){
 	
 	// WARNING Necessary for use map !!!
 	S_HeaderFrame * HdrFrame_Copy = ( S_HeaderFrame *) malloc(sizeof(S_HeaderFrame)); 
 	memcpy ( HdrFrame_Copy, HdrFrame, sizeof(S_HeaderFrame) );
 	
-	int size_temp = (HeaderFile->NbSamples*2+8); // size of one channel
+	// 	int size_temp = (HeaderFile->NbSamples*2+8); // size of one channel // Pb
+	int size_temp = (NbSamples*2+8); // size of one channel
+	
 	uint16_t * pRawData_Copy = (uint16_t *) calloc(NbrChannels,size_temp);
 	memcpy (pRawData_Copy, pRawData,NbrChannels*size_temp);
+	
+	// 	cout << "Size temp " << size_temp << endl;
 	
 	//       cout << "Adress of original pointeur "<< pRawData << endl;      
 	//       cout << "Adress of Copy pointeur "<< pRawData_Copy << endl;
@@ -335,7 +429,8 @@ int main()
 	map_NecessaryInformation[CptTriggerThor]["NbSamples"].push_back(NbSamples);
 	map_NecessaryInformation[CptTriggerThor]["NbrChannels"].push_back(NbrChannels);
 	
-	if(map_CompteurPaquetThor[CptTriggerThor]==NumberOfTotalFrameForWriteEvent  ){
+	if(CptTriggerThor == FirstCptTriggerThor && bool_FirstCptTriggerThor_Erase == false){;}
+	else if(map_CompteurPaquetThor[CptTriggerThor]==NumberOfTotalFrameForWriteEvent && CptTriggerThor !=FirstCptTriggerThor){
 	  
 	  if(Erase_Maps) TotTriggerThor_EventComplete+=1;
 	  
@@ -351,7 +446,10 @@ int main()
 	    uint16_t Crc	= NumberCard.second->GetCRC(pRawData_Temp);
 	    uint8_t Eof	= NumberCard.second->GetEof(pRawData_Temp);
 	    
-	    // 	  cout << "Eof " <<  hex<<unsigned(Eof)<<dec << "  "<< Color( NumberCard.second->IsEoFOk(Eof)) << endl;
+	    // 	    cout << "NbSample_Temp " << NbSample_Temp << endl;
+	    // 	     cout << "NbrChannels_Temp " << NbrChannels_Temp << endl;
+	    
+	    // 	    	  cout << "Eof " <<  hex<<unsigned(Eof)<<dec << "  "<< Color( NumberCard.second->IsEoFOk(Eof)) << endl;
 	    
 	    // WARNING Verify CRC AND EOF
 	    if(Color( NumberCard.second->IsCrcOk(Crc))=="Nok"){cout << "CRC Data channel after map aren't ok exit(0)" << endl;exit(0);} 
@@ -374,12 +472,37 @@ int main()
 	    map_Header.erase(CptTriggerThor);
 	  }
 	}
+	
       }
+      else{
+	CorruptFragment +=1;
+// 	cout << "Corrupt Frame "<< endl;
+      }
+      
+      if( z == 100){
+	
+	cout << "Erase Bug Fisrt Trigger " << FirstCptTriggerThor << endl;
+	map_CompteurPaquetThor.erase(FirstCptTriggerThor);
+	map_NecessaryInformation.erase(FirstCptTriggerThor);
+	
+	for (vector<uint16_t*>::iterator it = map_Channel[FirstCptTriggerThor].begin() ; it != map_Channel[FirstCptTriggerThor].end(); ++it){delete (*it);} 
+	map_Channel[FirstCptTriggerThor].clear();
+	for (vector<S_HeaderFrame*>::iterator it = map_Header[FirstCptTriggerThor].begin() ; it != map_Header[FirstCptTriggerThor].end(); ++it){delete (*it);} 
+	map_Header[FirstCptTriggerThor].clear();
+	map_Channel.erase(FirstCptTriggerThor);
+	map_Header.erase(FirstCptTriggerThor);
+	bool_FirstCptTriggerThor_Erase = true;
+      }
+      
+      
       if(z == NombreDeFragmentATester && LimitForTest == true ){cout << "Stop after "<< z <<" trames" <<endl; break;}
       z++;
     }
     if(z == NombreDeFragmentATester && LimitForTest == true ){cout << "Stop after "<< z <<" trames" <<endl; break;}
   }	while ((pCh != NULL)); // pCh != Null -> Mettre une valeur si on ne veux pas décoder une channel
+  
+  cout << "CorruptFragment " << CorruptFragment << endl;
+  
   
   // For Test Break of different File
   cout << "\n";
@@ -392,6 +515,9 @@ int main()
   int Event_With_A_Lost_Packet = 0;
   int LostPacket=0;
   int TotTriggerThor = TotTriggerThor_EventComplete;
+  
+  cout << "\nTotTriggerThor_EventComplete " << TotTriggerThor_EventComplete << endl;
+  
   map <int , int> map_Lost_Packet_Event;
   
   for(auto& x: map_Channel){
@@ -421,39 +547,47 @@ int main()
   cout << "\nEvent_With_A_Lost_Packet " << Event_With_A_Lost_Packet << " TotPacket_Event " << TotTriggerThor << " whether " << PercentEventWithLostPacket << " %" << endl;
   cout << "if it had some lost Packet : Packet Lost Mean " << MeanPacketLostPerEvent << endl;
   
-  
-    if(SaveIncompleteEvent == true){
+  cout << "SaveIncompleteEvent " << SaveIncompleteEvent << endl;
+  if(SaveIncompleteEvent == true){
     
-      cout << "\nSave Incomplete Event at the end of file \n" << endl;
+    cout << "\nSave Incomplete Event at the end of file \n" << endl;
+    
+    for(auto& CptTriggerThor_it: map_Channel){
       
-    	for(auto& CptTriggerThor_it: map_Channel){
+      int CptTriggerThor = CptTriggerThor_it.first;
+      
+      if(CptTriggerThor == FirstCptTriggerThor && bool_FirstCptTriggerThor_Erase == false){
+	cout << "Ignore First Trigger Thor Bug DAQ" << endl;
+      }
+      else{
+	cout << "CptTriggerThor " << CptTriggerThor << endl;
+	
+	for(int i =0; i< CptTriggerThor_it.second.size();i++ ){
 	  
-	  int CptTriggerThor = CptTriggerThor_it.first;
+	  S_HeaderFrame *HdrFrame_Temp	= map_Header[CptTriggerThor][i];
+	  uint16_t *pRawData_Temp	= map_Channel[CptTriggerThor][i];
+	  int NbSample_Temp	= map_NecessaryInformation[CptTriggerThor]["NbSamples"][i];
+	  int NbrChannels_Temp	= map_NecessaryInformation[CptTriggerThor]["NbrChannels"][i];
 	  
-	  for(int i =0; i< CptTriggerThor_it.second.size();i++ ){
-	    
-	    S_HeaderFrame *HdrFrame_Temp	= map_Header[CptTriggerThor][i];
-	    uint16_t *pRawData_Temp	= map_Channel[CptTriggerThor][i];
-	    int NbSample_Temp	= map_NecessaryInformation[CptTriggerThor]["NbSamples"][i];
-	    int NbrChannels_Temp	= map_NecessaryInformation[CptTriggerThor]["NbrChannels"][i];
-	    
-	    fwrite(HdrFrame_Temp,sizeof(S_HeaderFrame),1,File ); 
-	    // 	  fwrite(pRawData_Temp,(((1024+(2))*4)+2),2,File ); 
-	    fwrite(pRawData_Temp,(((NbSample_Temp+(2))*NbrChannels_Temp)+2),2,File ); 
-	  }
-	  
-	  if(Erase_Maps){
-	    map_CompteurPaquetThor.erase(CptTriggerThor);
-	    map_NecessaryInformation.erase(CptTriggerThor);
-	    
-	    for (vector<uint16_t*>::iterator it = map_Channel[CptTriggerThor].begin() ; it != map_Channel[CptTriggerThor].end(); ++it){delete (*it);} 
-	    map_Channel[CptTriggerThor].clear();
-	    for (vector<S_HeaderFrame*>::iterator it = map_Header[CptTriggerThor].begin() ; it != map_Header[CptTriggerThor].end(); ++it){delete (*it);} 
-	    map_Header[CptTriggerThor].clear();
-	    map_Channel.erase(CptTriggerThor);
-	    map_Header.erase(CptTriggerThor);
-	  }
+	  fwrite(HdrFrame_Temp,sizeof(S_HeaderFrame),1,File ); 
+	  // 	  fwrite(pRawData_Temp,(((1024+(2))*4)+2),2,File ); 
+	  fwrite(pRawData_Temp,(((NbSample_Temp+(2))*NbrChannels_Temp)+2),2,File ); 
 	}
+	
+      }
+      
+      if(Erase_Maps){
+	map_CompteurPaquetThor.erase(CptTriggerThor);
+	map_NecessaryInformation.erase(CptTriggerThor);
+	
+	for (vector<uint16_t*>::iterator it = map_Channel[CptTriggerThor].begin() ; it != map_Channel[CptTriggerThor].end(); ++it){delete (*it);} 
+	map_Channel[CptTriggerThor].clear();
+	for (vector<S_HeaderFrame*>::iterator it = map_Header[CptTriggerThor].begin() ; it != map_Header[CptTriggerThor].end(); ++it){delete (*it);} 
+	map_Header[CptTriggerThor].clear();
+	map_Channel.erase(CptTriggerThor);
+	map_Header.erase(CptTriggerThor);
+      }
+    }
   }
   
   cout << "\n*************** End Main ***************\n" << endl;

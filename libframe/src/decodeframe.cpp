@@ -135,7 +135,6 @@ S_HeaderFile *DecodeFrame::GetHeaderFile()
   return (HeaderFile);
 }
 
-
 bool DecodeFrame::SetPacket(uint16_t *Packet)
 {
   HeaderFrame = (struct S_HeaderFrame *) Packet;
@@ -146,6 +145,27 @@ bool DecodeFrame::SetPacket(uint16_t *Packet)
   Soc = DECSOC(pChannel[0]);
   Crc = ntohs(pChannel[(HeaderFile->NbSamples+2)*4]);
   EoF = ntohs(pChannel[(HeaderFile->NbSamples+2)*4+1]);
+  Index = 0;
+  return true;
+}
+
+
+bool DecodeFrame::SetPacket(uint16_t *Packet,uint16_t lg)
+{
+  HeaderFrame = (struct S_HeaderFrame *) Packet;
+  HeaderFile->FrontEndId = GetFeId();
+  HeaderFile->NbSamples = GetNbSamples();
+  pChannel = &Packet[(sizeof(struct S_HeaderFrame) >> 1)];
+  
+  Soc = DECSOC(pChannel[0]);
+  if (((HeaderFile->NbSamples+2)*4) <= lg) {
+    Crc = ntohs(pChannel[(HeaderFile->NbSamples+2)*4]);
+    EoF = ntohs(pChannel[(HeaderFile->NbSamples+2)*4+1]);
+  }
+  else {
+    Crc = 0x00;
+    EoF = 0x00;
+  }
   Index = 0;
   return true;
 }
@@ -170,7 +190,6 @@ bool DecodeFrame::FrameErrornoTT()
   //if (!IsSoCOk()) ErrFrame.ErrSoc++; //pas implementer car si extrait que le header Soc n'est pas lu
   if (!IsEoFOk()) ErrFrame.ErrEoF++;
   if (!IsCrcOk()) ErrFrame.ErrCrc++;
-  if (IsErrorTT()) ErrFrame.ErrTT++;
   return (IsSoFOk() & IsCafeDecaOk() & IsBoboOk() & IsEoFOk() & IsCrcOk());
 }
 
