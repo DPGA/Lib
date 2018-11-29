@@ -58,7 +58,7 @@ const char *Color(bool c){
 
 
 // recursive function to count set bits 
-int countSetBits(int n) 
+int countSetBits(unsigned long n) 
 { 
   // base case 
   if (n == 0) 
@@ -92,7 +92,7 @@ string DoubleToString (double var ){
   //   if(strncmp(&str.back(),".",1)==0)cout <<"str before " <<str << endl;
   if(strncmp(&str.back(),".",1)==0){str.pop_back(); 
     /*cout <<"str after " <<str << endl;*/}
-    return str;
+  return str;
 }
 
 string IntToString (int var ){
@@ -101,7 +101,7 @@ string IntToString (int var ){
   //   if(strncmp(&str.back(),".",1)==0)cout <<"str before " <<str << endl;
   if(strncmp(&str.back(),".",1)==0){str.pop_back(); 
     /*cout <<"str after " <<str << endl;*/}
-    return str;
+  return str;
 }
 
 void ReadAndLoadADirectory(vector <string> &v_CompleteNameOfFile,string Path,string NameOfDirectory , string ExtensionOfResearchFile ){
@@ -122,10 +122,10 @@ void ReadAndLoadADirectory(vector <string> &v_CompleteNameOfFile,string Path,str
   while ((fichierLu = readdir(rep)) != NULL){
     string NameOf_fichierLu = fichierLu->d_name;
     if(isDir(NameOf_fichierLu,ExtensionOfResearchFile) == 1)
-    { 
-      printf("Le fichier lu s'appelle '%s'\n", fichierLu->d_name);
-      v_CompleteNameOfFile.push_back(Complete_dir+NameOf_fichierLu);
-    }
+      { 
+	printf("Le fichier lu s'appelle '%s'\n", fichierLu->d_name);
+	v_CompleteNameOfFile.push_back(Complete_dir+NameOf_fichierLu);
+      }
   }
   cout << "\n";
   
@@ -141,7 +141,7 @@ int NumberOfTotalFrameForWriteEvent_Pattern(uint64_t Pattern, int TotalOfASM) {
   if(Pattern == (uint64_t)0xfffffffff ) return (6* TotalOfASM);
   else{
     //     cout << "Unknow Pattern [Build_Event_Multi.cpp] Patern hex " << hex<<Pattern<<dec << endl;
-//     /* exit(0);*/
+    //     /* exit(0);*/
     return NumberOfTotalFrameForWriteEvent;
     
   } 
@@ -174,14 +174,17 @@ int main()
   
   //name file input put directory
   string Path = "/datas1/";
-  string NameOfDirectory = "Run_000037";
+  //string NameOfDirectory = "Run_000037";
+  string NameOfDirectory = "RunTest";
   
   // Write_File_Multi
-  system("rm /home/daq/Merge/Write_File_Multi_Run_000037.bin");
-  const char * W_FileName = "/home/daq/Merge/Write_File_Multi_Run_000037.bin";
-//   W_FileName="/media/sf_Documents/run4Board1_Merge";
+  //system("rm /home/daq/Merge/Write_File_Multi_Run_000037.bin");
+  //const char * W_FileName = "/home/daq/Merge/Write_File_Multi_Run_000037.bin";
+  system("rm /home/daq/Merge/Write_File_Multi_Run.bin");
+  const char * W_FileName = "/home/daq/Merge/Write_File_Multi_Run.bin";
+  //   W_FileName="/media/sf_Documents/run4Board1_Merge";
   
-   bool bool_FirstCptTriggerThor = false; // Enleve le 1er compteur Thor bug DAQ False
+  bool bool_FirstCptTriggerThor = false; // Enleve le 1er compteur Thor bug DAQ False
   if(TestFile == true){
     Path = "./DataMulti/";
     NameOfDirectory = "";
@@ -211,11 +214,11 @@ int main()
     DecodeFrame *s1 = new DecodeFrame(x.c_str());
     HeaderFile = s1->GetHeaderFile();
     if(!HeaderFile){cout << "No Header File please check datas ! exit(0)" << endl; exit(0);}
-//     printf("main Mode file = %d, Feid = %x NbSample= %d\n",HeaderFile->ModeFile,HeaderFile->FrontEndId,HeaderFile->NbSamples);
+    //     printf("main Mode file = %d, Feid = %x NbSample= %d\n",HeaderFile->ModeFile,HeaderFile->FrontEndId,HeaderFile->NbSamples);
     
     int NumeroCard = (HeaderFile->FrontEndId);
     int Real_NumeroCard = NumeroCard-16;
-    cout <<"#Card dec " << (NumeroCard-16) << " hex " << hex<<NumeroCard<<dec << "\n" <<endl;
+    cout <<"#Card dec " << NumeroCard << "  " << (NumeroCard-16) << " hex " << hex<<NumeroCard<<dec << "\n" <<endl;
     
     
     if(Real_NumeroCard < 0){
@@ -225,13 +228,13 @@ int main()
     
     if(map_LoadAllData[Real_NumeroCard] != NULL){
       cout << "DATA of same card exit(0) " << Real_NumeroCard << endl; exit(0);}
-      else map_LoadAllData[Real_NumeroCard]=s1;
-      //**** Write one Header Now Hearder of the first card ***/ 
-      cout << "Write one Header Now Hearder of the first card " << endl;
-      if(indic ==0){fwrite(HeaderFile,sizeof(S_HeaderFile),1,File );}
-      cout << "end write " << endl;
-      //******
-      indic++;
+    else map_LoadAllData[Real_NumeroCard]=s1;
+    //**** Write one Header Now Hearder of the first card ***/ 
+    cout << "Write one Header Now Hearder of he first card " << endl;
+    if(indic ==0){fwrite(HeaderFile,sizeof(S_HeaderFile),1,File );}
+    cout << "end write " << endl;
+    //******
+    indic++;
   }
   
   cout << "\nNbr of File (1 File = 1 Card) After check name : " << map_LoadAllData.size() << "\n" << endl;
@@ -259,9 +262,8 @@ int main()
   unsigned long CorruptFragment = 0;
   
   int StopAfterCheckAllCard = 0;
-  int NumberOfTotalFrameForWriteEvent = 6 * map_LoadAllData.size();
-  
-  
+  unsigned int NumberOfTotalFrameForWriteEvent = 6 * map_LoadAllData.size();
+  cout << " NumberOfTotalFrameForWriteEvent = " << NumberOfTotalFrameForWriteEvent << endl;
   
   map <int, int > map_For_Break;
   int SizeDataFiles = map_LoadAllData.size();
@@ -300,8 +302,11 @@ int main()
       if(bool_FirstCptTriggerThor==false){FirstCptTriggerThor=CptTriggerThor;bool_FirstCptTriggerThor=true;}
       
       
-//       NumberOfTotalFrameForWriteEvent =  2 * countSetBits(NumberCard.second->GetPattern()); // method 1
-        NumberOfTotalFrameForWriteEvent = 2 * __builtin_popcount (NumberCard.second->GetPattern()); // method 2
+      //NumberOfTotalFrameForWriteEvent =  2 * countSetBits(NumberCard.second->GetPattern()); // method 1
+      cout << "Pattern (ASM Board " << NumberCard.first << ") = " <<  hex<<NumberCard.second->GetPattern()<<dec << endl;
+      //NumberOfTotalFrameForWriteEvent = 2 * __builtin_popcount (NumberCard.second->GetPattern()); // method 2
+      NumberOfTotalFrameForWriteEvent = 72;
+      //cout << "  -> NumberOfTotalFrameForWriteEvent = " << NumberOfTotalFrameForWriteEvent << endl;
       
       //
       //       NumberOfTotalFrameForWriteEvent = NumberOfTotalFrameForWriteEvent_Pattern(NumberCard.second->GetPattern(),SizeDataFiles);
@@ -393,17 +398,17 @@ int main()
       // 		Map For constitute event
       //********************************************************************
       
-       uint16_t Crc_Original	= NumberCard.second->GetCRC(pRawData);
-       string Crc_Original_String = Color(NumberCard.second->IsCrcOk(Crc_Original));
+      uint16_t Crc_Original	= NumberCard.second->GetCRC(pRawData);
+      string Crc_Original_String = Color(NumberCard.second->IsCrcOk(Crc_Original));
        
       /*
-		* \brief donne l'information si Trigger fibre non reçu
-		* \return false si le trigger fibre est bien reçu sinon true
-		* \brief si la reponse est true, les infomations TT,Pattern,TimestampThor,Trigger count sont éronnées
-		*/	
-       bool ErorTT = NumberCard.second->IsErrorTT();
+       * \brief donne l'information si Trigger fibre non reçu
+       * \return false si le trigger fibre est bien reçu sinon true
+       * \brief si la reponse est true, les infomations TT,Pattern,TimestampThor,Trigger count sont éronnées
+       */	
+      bool ErorTT = NumberCard.second->IsErrorTT();
       
-//       if(ErorTT == true )cout << "Cpt " << CptTriggerThor << endl;
+      //       if(ErorTT == true )cout << "Cpt " << CptTriggerThor << endl;
       
       //*** Map For constitute event
       if( pRawData && HdrFrame && Crc_Original_String !="Nok" && ErorTT == false && CptTriggerThor>0 ){
@@ -476,7 +481,7 @@ int main()
       }
       else{
 	CorruptFragment +=1;
-// 	cout << "Corrupt Frame "<< endl;
+	// 	cout << "Corrupt Frame "<< endl;
       }
       
       if( z == 100){
